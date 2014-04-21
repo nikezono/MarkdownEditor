@@ -65,6 +65,11 @@ $(function() {
   document.execCommand('defaultParagraphSeparator', false, '');
   $Input = $('#Inputview');
   $Preview = $('#Preview');
+  marked.setOptions({
+    gfm: true,
+    tables: true,
+    breaks: true
+  });
   source = "";
   firstInput = true;
   $Input.on('mousedown', function() {

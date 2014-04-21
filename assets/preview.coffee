@@ -3,6 +3,11 @@ $ ->
   $Input   = $('#Inputview')
   $Preview = $('#Preview')
 
+  marked.setOptions
+    gfm:true
+    tables:true
+    breaks:true
+
   source = ""
   firstInput = true
 
