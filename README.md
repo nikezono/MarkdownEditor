@@ -5,7 +5,12 @@ SimpleMarkdownEditor
 
 これが車輪の再発明病か
 
-usage
+http://md.nikezono.net/
 
-    git clone
+usage
+---
+
+    git clone git@github.com:nikezono/MarkdownEditor.git
+    npm install
+    make coffee
     coffee server.coffee --port PORTNUMBER
