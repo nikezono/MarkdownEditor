@@ -8,7 +8,9 @@ SimpleMarkdownEditor
 http://md.nikezono.net/
 
 usage
+---
 
     git clone git@github.com:nikezono/MarkdownEditor.git
     npm install
+    make coffee
     coffee server.coffee --port PORTNUMBER
