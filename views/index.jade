@@ -1,0 +1,57 @@
+doctype html
+
+head
+
+  //- STYLESHEET -//
+  link(rel='stylesheet',href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+
+  //- JAVASCRIPT -//
+  script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js')
+  script(type='application/javascript',src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
+  script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
+  script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.min.js')
+
+  //- USER LIBRARY -//
+  link(rel='stylesheet',href='/css/style.css')
+  script(type='text/javascript',src='/js/app.js')
+
+body
+
+  .rows.fill
+    .col-lg-12#Titles
+      h1 Markdown Editor
+      p markdown editor,previewer,converter
+
+    .col-lg-12#Buttons
+      .btn-group.btn-group-justified
+        .btn-group
+          button.btn.btn-default#Zen
+            i.glyphicon.glyphicon-eye-open
+            span  Zen
+        .btn-group
+          a#MdSave
+            button.btn.btn-primary
+              i.glyphicon.glyphicon-floppy-save
+              span  Download Markdown
+        .btn-group
+          a#HtmlSave
+            button.btn.btn-success
+              i.glyphicon.glyphicon-arrow-down
+              span  Download html
+        .btn-group
+          button.btn.btn-inverse#Typewriter
+            i.glyphicon.glyphicon-volume-down
+            span  Typewriter
+
+
+    .col-lg-12.fill#Containers
+      .col-lg-6
+        h3 Markdown Editor
+      .col-lg-6
+        h3 HTML Preview
+      .col-lg-12.fill#ZenView
+        .col-lg-6.fill
+          .fill.well#Inputview(contenteditable='true')
+            this area is editable.
+        .col-lg-6
+          #Preview

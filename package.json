@@ -1,0 +1,18 @@
+{
+  "name": "MarkdownEditor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+    "express":"*",
+    "coffee-script":"*",
+    "jade":"*",
+    "morgan":"*",
+    "optimist":"*"
+  },
+  "author": "nikezono",
+  "license": "MIT"
+}
