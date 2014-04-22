@@ -126,6 +126,7 @@ $(function() {
     });
   }
   $Input.keyup(function(e) {
+    window.counter = 0;
     return setTimeout(function() {
       return compile();
     }, 200);

@@ -20,6 +20,7 @@ $ ->
 
 
   $Input.keyup (e)->
+    window.counter = 0
     setTimeout ->
       compile()
     ,200
