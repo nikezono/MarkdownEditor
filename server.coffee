@@ -43,6 +43,7 @@ io.sockets.on 'connection', (socket)->
 
   socket.on 'update',(data)->
     Page.findOrCreateOneByUUID data.path,(page)->
+      return if page.md is data.md # 重複
       page.cache.push page.md || ""
       page.date.push new Date()
       page.md = data.md
