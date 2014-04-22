@@ -1,6 +1,9 @@
 # REQUIREMENT
-express = require 'express'
-argv    =  require('optimist').argv
+express  = require 'express'
+argv     = require('optimist').argv
+uuid     = require('node-uuid')
+mongoose = require 'mongoose'
+socketIO = require 'socket.io'
 
 # Application
 #
@@ -13,8 +16,31 @@ app.set 'view engine', 'jade'
 app.set 'views', __dirname + '/views'
 app.use express.static(__dirname + '/public')
 
-app.get '/', (req,res)->
-  res.render 'index'
+# DATABASES
+mongoose.connect "mongodb://localhost/markdown"
+Page = require './models/Page'
 
-app.listen app.locals.port
+# ROUTING
+app.get '/',      (req,res)-> res.render 'index'
+app.get '/create',(req,res)-> res.json { page:uuid.v1() }
+app.get '/:page', (req,res)->
+  id = req.params.page
+  Page.findOrCreateOneByUUID id,(page)->
+    res.render 'editor',
+      page:page
+
+server = app.listen app.locals.port
+
+# Socket.IO
+io = socketIO.listen(server)
+io.sockets.on 'connection', (socket)->
+
+  socket.on 'update',(data)->
+    Page.findOrCreateOneByUUID data.path,(page)->
+      page.cache.push page.md || ""
+      page.date.push new Date()
+      page.md = data.md
+      page.save (err,doc)->
+        return console.log err if err
+
 console.log "MarkdownEditor listen #{app.locals.port}"

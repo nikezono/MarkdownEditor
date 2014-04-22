@@ -11,7 +11,10 @@
     "coffee-script":"*",
     "jade":"*",
     "morgan":"*",
-    "optimist":"*"
+    "optimist":"*",
+    "node-uuid":"*",
+    "socket.io":"*",
+    "mongoose":"*"
   },
   "author": "nikezono",
   "license": "MIT"

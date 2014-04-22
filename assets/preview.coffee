@@ -9,13 +9,11 @@ $ ->
     breaks:true
 
   source = ""
-  firstInput = true
 
-  $Input.on 'mousedown', ->
-    if firstInput
-      $Input.html('')
-      firstInput = false
-    true
+  if $Input.length
+    $(document).ready ->
+      compile()
+
 
   $Input.keyup (e)->
     setTimeout ->

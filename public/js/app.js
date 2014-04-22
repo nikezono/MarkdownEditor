@@ -61,7 +61,44 @@ $(function() {
 });
 
 $(function() {
-  var $Input, $Preview, compile, firstInput, source;
+  var $Create;
+  $Create = $('#Create');
+  return $Create.click(function(e) {
+    return $.getJSON('/create', null, function(json) {
+      return location.href = "/" + json.page;
+    });
+  });
+});
+
+$(function() {
+  var $Input, path, save, socket;
+  path = window.location.pathname.split("/")[1];
+  if (path === "") {
+    return;
+  }
+  socket = io.connect();
+  $Input = $('#Inputview');
+  $Input.keypress(function(e) {
+    if (e.keyCode !== 13) {
+      return;
+    }
+    return save();
+  });
+  $Input.focusout(function(e) {
+    return save();
+  });
+  return save = function() {
+    var source;
+    source = $Input.html();
+    return socket.emit('update', {
+      path: path,
+      md: source
+    });
+  };
+});
+
+$(function() {
+  var $Input, $Preview, compile, source;
   document.execCommand('defaultParagraphSeparator', false, '');
   $Input = $('#Inputview');
   $Preview = $('#Preview');
@@ -71,14 +108,11 @@ $(function() {
     breaks: true
   });
   source = "";
-  firstInput = true;
-  $Input.on('mousedown', function() {
-    if (firstInput) {
-      $Input.html('');
-      firstInput = false;
-    }
-    return true;
-  });
+  if ($Input.length) {
+    $(document).ready(function() {
+      return compile();
+    });
+  }
   $Input.keyup(function(e) {
     return setTimeout(function() {
       return compile();

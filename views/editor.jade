@@ -1,0 +1,39 @@
+extends layout
+block content
+
+  .col-lg-12#Buttons
+    .btn-group.btn-group-justified
+      .btn-group
+        button.btn.btn-default#Zen
+          i.glyphicon.glyphicon-eye-open
+          span  Zen
+      .btn-group
+        a#MdSave
+          button.btn.btn-primary
+            i.glyphicon.glyphicon-floppy-save
+            span  Download Markdown
+      .btn-group
+        a#HtmlSave
+          button.btn.btn-success
+            i.glyphicon.glyphicon-arrow-down
+            span  Download html
+      .btn-group
+        button.btn.btn-inverse#Typewriter
+          i.glyphicon.glyphicon-volume-down
+          span  Typewriter
+
+
+  .col-lg-12.fill#Containers
+    .col-lg-6
+      h3 Markdown Editor
+    .col-lg-6
+      h3 HTML Preview
+    .col-lg-12.fill#ZenView
+      .col-lg-6.fill
+        .fill#Inputview(contenteditable='true')
+          if page.md
+            != page.md
+          else
+            | this area is editable.
+      .col-lg-6
+        #Preview
