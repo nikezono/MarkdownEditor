@@ -7,7 +7,7 @@
 Mongo = require 'mongoose'
 
 PageSchema = new Mongo.Schema
-  uuid : String
+  uuid : { type:String, unique:true}
   md   : String
   cache: [String]
   date : [Date]

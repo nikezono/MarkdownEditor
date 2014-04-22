@@ -78,6 +78,15 @@ $(function() {
   }
   socket = io.connect();
   $Input = $('#Inputview');
+  socket.emit('page', path);
+  socket.on('page', function(page) {
+    window.page = page;
+    return window.compile();
+  });
+  socket.on('updated', function(page) {
+    window.page = page;
+    return window.compile();
+  });
   $Input.keypress(function(e) {
     if (e.keyCode !== 13) {
       return;
@@ -98,10 +107,13 @@ $(function() {
 });
 
 $(function() {
-  var $Input, $Preview, compile, source;
+  var $Changed, $Input, $Preview, $Url, $Versions, compile, source;
   document.execCommand('defaultParagraphSeparator', false, '');
   $Input = $('#Inputview');
   $Preview = $('#Preview');
+  $Url = $('#Url');
+  $Changed = $('#Changed');
+  $Versions = $('#Versions');
   marked.setOptions({
     gfm: true,
     tables: true,
@@ -123,13 +135,52 @@ $(function() {
       return compile();
     }, 200);
   });
-  return compile = function() {
-    var html;
+  return compile = window.compile = function() {
+    var html, page;
     source = $Input.html().replace(/&nbsp;/gi, ' ').replace(/<br>/gi, '\n').replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
     html = marked(source);
     $Preview.html(html);
-    return $('pre code').each(function(i, e) {
+    $('pre code').each(function(i, e) {
       return hljs.highlightBlock(e);
     });
+    if (window.page != null) {
+      page = window.page;
+      $Url.text("url=http://md.nikezono.net/" + page.uuid);
+      $Changed.text("changed:" + (moment(page.date[page.date.length - window.counter]).fromNow()));
+      return $Versions.text("version " + (page.date.length - window.counter) + " in " + page.date.length + " versions");
+    }
   };
+});
+
+$(function() {
+  var $Input, $Next, $Prev, counter;
+  $Prev = $('#Prev');
+  $Next = $('#Next');
+  $Input = $('#Inputview');
+  window.counter = counter = 0;
+  $Prev.click(function() {
+    var page;
+    if (window.page == null) {
+      return;
+    }
+    page = window.page;
+    window.counter = window.counter + 1;
+    console.log("version " + window.counter + " total " + page.cache.length);
+    if (window.counter === window.page.date.length) {
+      return window.counter -= 1;
+    }
+    $Input.html(page.cache[page.date.length - window.counter]);
+    return window.compile();
+  });
+  return $Next.click(function() {
+    var page;
+    if ((window.page == null) || window.counter === 0) {
+      return;
+    }
+    page = window.page;
+    window.counter = window.counter - 1;
+    console.log("version " + window.counter + " total " + page.cache.length);
+    $Input.html(page.cache[page.date.length - window.counter]);
+    return window.compile();
+  });
 });

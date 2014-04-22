@@ -31,14 +31,14 @@ block content
           i.glyphicon.glyphicon-volume-down
           span  Next
   .col-lg-3
-    if page.date.length
-      p="http://md.nikezono.net/"+page.uuid
-      p
-        small.text-right="changed:"+latest
-      p
-        small.text-right
-          =page.date.length
-          | versions
+    p
+      small.text-right#Url="url=http://md.nikezono.net/"+page.uuid
+    p
+      small.text-right#Changed="changed:"+latest
+    p
+      small.text-right#Versions
+        =page.date.length
+        |  versions
 
 
 

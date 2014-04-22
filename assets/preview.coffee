@@ -3,6 +3,10 @@ $ ->
   $Input   = $('#Inputview')
   $Preview = $('#Preview')
 
+  $Url      = $('#Url')
+  $Changed  = $('#Changed')
+  $Versions = $('#Versions')
+
   marked.setOptions
     gfm:true
     tables:true
@@ -27,9 +31,17 @@ $ ->
       compile()
     ,200
 
-  compile = ->
+  compile = window.compile = ->
+    # md
     source = $Input.html().replace(/&nbsp;/gi,' ').replace(/<br>/gi,'\n').replace(/<div>/gi,'\n').replace(/<\/div>/gi,'')
     html = marked source
     $Preview.html(html)
+    # Highlight
     $('pre code').each (i,e)-> hljs.highlightBlock(e)
+    # Status
+    if window.page?
+      page = window.page
+      $Url.text("url=http://md.nikezono.net/#{page.uuid}")
+      $Changed.text("changed:#{moment(page.date[page.date.length - window.counter]).fromNow()}")
+      $Versions.text("version #{page.date.length - window.counter} in #{page.date.length} versions")
 
