@@ -4,6 +4,7 @@ argv     = require('optimist').argv
 uuid     = require('node-uuid')
 mongoose = require 'mongoose'
 socketIO = require 'socket.io'
+moment   = require 'moment'
 
 # Application
 #
@@ -28,6 +29,7 @@ app.get '/:page', (req,res)->
   Page.findOrCreateOneByUUID id,(page)->
     res.render 'editor',
       page:page
+      latest:moment(page.date[page.date.length-1]).fromNow()
 
 server = app.listen app.locals.port
 

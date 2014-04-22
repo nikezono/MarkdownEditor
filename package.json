@@ -14,7 +14,8 @@
     "optimist":"*",
     "node-uuid":"*",
     "socket.io":"*",
-    "mongoose":"*"
+    "mongoose":"*",
+    "moment":"*"
   },
   "author": "nikezono",
   "license": "MIT"
