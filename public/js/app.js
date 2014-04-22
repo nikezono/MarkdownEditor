@@ -91,8 +91,11 @@ $(function() {
   });
   return compile = function() {
     var html;
-    source = $Input.html().replace(/<br>/gi, '\n').replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
+    source = $Input.html().replace(/&nbsp;/gi, ' ').replace(/<br>/gi, '\n').replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
     html = marked(source);
-    return $Preview.html(html);
+    $Preview.html(html);
+    return $('pre code').each(function(i, e) {
+      return hljs.highlightBlock(e);
+    });
   };
 });

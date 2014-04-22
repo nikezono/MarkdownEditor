@@ -22,6 +22,7 @@ $ ->
       compile()
     ,200
 
+
   # コピペ
   $Input.on 'paste', (e)->
     setTimeout ->
@@ -29,7 +30,8 @@ $ ->
     ,200
 
   compile = ->
-    source = $Input.html().replace(/<br>/gi,'\n').replace(/<div>/gi,'\n').replace(/<\/div>/gi,'')
+    source = $Input.html().replace(/&nbsp;/gi,' ').replace(/<br>/gi,'\n').replace(/<div>/gi,'\n').replace(/<\/div>/gi,'')
     html = marked source
     $Preview.html(html)
+    $('pre code').each (i,e)-> hljs.highlightBlock(e)
 
