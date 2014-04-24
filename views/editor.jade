@@ -39,15 +39,17 @@ block content
           i.glyphicon.glyphicon-forward
           span  Next
   .col-lg-3
-    p
-      small.text-right#Url="url=http://md.nikezono.net/"+page.uuid
-    p
-      small.text-right#Changed="changed:"+latest
-    p
-      small.text-right#Versions
-        =page.date.length
-        |  versions
-
+    ul
+      li
+       small.text-right#Url="url=http://md.nikezono.net/"+page.uuid
+      li
+        small.text-right#Changed="changed:"+latest
+      li
+        small.text-right#Versions
+          =page.date.length
+          |  versions
+      li
+        small.text-right#TypeMode Typewriter=0
 
 
   .col-lg-12#Containers
