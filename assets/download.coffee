@@ -6,8 +6,8 @@ $ ->
 
   $Input = $('#Inputview')
 
-  $Input.keyup ->
-    markdown = $Input.html().replace(/<br>gi/,'\n').replace(/<div>/gi,'\n').replace(/<\/div>/gi,'')
+  downloadURLUpdate = ->
+    markdown = $Input.html().replace(/<br>/gi,'\n').replace(/<div>/gi,'\n').replace(/<\/div>/gi,'').replace(/<br\/>/gi,'\n')
 
     # Md
     blob = new Blob [ markdown ],
@@ -15,8 +15,16 @@ $ ->
     $Md.attr('href',window.URL.createObjectURL(blob))
     .attr("download", "file.md")
 
+    markded = "<html><head><meta charset='UTF-8'></head><body>" + marked markdown  + "</body></html>"
+
     # Html
-    html = new Blob [ marked(markdown) ],
+    html = new Blob [ markded ],
       type: "text/plain"
     $Html.attr('href',window.URL.createObjectURL(html))
     .attr("download","file.html")
+
+  downloadURLUpdate()
+  $Input.change ->
+    downloadURLUpdate()
+
+
