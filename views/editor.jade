@@ -50,17 +50,18 @@ block content
 
 
 
-  .col-lg-12.fill#Containers
-    .col-lg-6
-      h3 Markdown Editor
-    .col-lg-6
-      h3 HTML Preview
-    .col-lg-12.fill#ZenView
+  .col-lg-12#Containers
+    .col-lg-12#ZenView.fill
       .col-lg-6.fill
-        .fill#Inputview(contenteditable='true')
-          if page.md
-            != page.md
-          else
-            | this area is editable.
+        h3 Markdown Editor
+        .col-lg-12.fill
+          .scroll#Inputview(contenteditable='true').fill
+            if page.md
+              != page.md
+            else
+              | this area is editable.
       .col-lg-6
-        #Preview
+        h3 HTML Preview
+        .col-lg-12
+          #Preview.scroll
+

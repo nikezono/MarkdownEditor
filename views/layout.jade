@@ -23,10 +23,12 @@ head
 
 body
 
-  .rows.fill
+  .rows
     .col-lg-12#Titles
-      h1 Markdown Editor
-      p markdown editor,previewer,converter
+      .page-header
+        h1 Markdown Editor
+          small   markdown editor,previewer,converter.
+            a(href="https://github.com/nikezono/MarkdownEditor")   Github
     .col-lg-12(style="display:none")
       .alert.alert-danger.alert-dismissible
         button.close(data-dismiss="alert" aria-hidden=true) &times;

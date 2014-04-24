@@ -19,26 +19,22 @@ $(function() {
 });
 
 $(function() {
-  var $Input, $Type, $Zen, $ZenView, key, linebreak, typeMode;
+  var $Input, $Presen, $Preview, $Type, $Zen, $ZenView, fullscreen, key, linebreak, typeMode;
   $Zen = $('#Zen');
   $ZenView = $('#ZenView');
+  $Presen = $('#Presentation');
+  $Preview = $('#Preview');
   $Type = $('#Typewriter');
   $Input = $('#Inputview');
   $Zen.click(function() {
     var target;
     target = document.getElementById('ZenView');
-    $ZenView.addClass('fullscreen');
-    if (target.webkitRequestFullscreen) {
-      return target.webkitRequestFullscreen();
-    } else if (target.mozRequestFullScreen) {
-      return target.mozRequestFullScreen();
-    } else if (target.msRequestFullscreen) {
-      return target.msRequestFullscreen();
-    } else {
-      if (target.requestFullscreen) {
-        return target.requestFullscreen();
-      }
-    }
+    return fullscreen(target);
+  });
+  $Presen.click(function() {
+    var target;
+    target = document.getElementById('Preview');
+    return fullscreen(target);
   });
   typeMode = false;
   key = new Audio('/sound/key.mp3');
@@ -46,7 +42,7 @@ $(function() {
   $Type.click(function() {
     return typeMode ^= true;
   });
-  return $Input.keydown(function(e) {
+  $Input.keydown(function(e) {
     if (!typeMode) {
       return;
     }
@@ -58,6 +54,19 @@ $(function() {
       return key = new Audio(key.src);
     }
   });
+  return fullscreen = function(target) {
+    if (target.webkitRequestFullscreen) {
+      return target.webkitRequestFullscreen();
+    } else if (target.mozRequestFullScreen) {
+      return target.mozRequestFullScreen();
+    } else if (target.msRequestFullscreen) {
+      return target.msRequestFullscreen();
+    } else {
+      if (target.requestFullscreen) {
+        return target.requestFullscreen();
+      }
+    }
+  };
 });
 
 $(function() {

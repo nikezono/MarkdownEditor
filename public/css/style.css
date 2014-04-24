@@ -1,14 +1,45 @@
 html,body
 {
-  height: 100%;
-}
-.fill
-{
-  height:100%;
-}
-.fullscreen
-{
-  height:100%;
   width:100%;
-  padding-top:10px;
+  height:100%;
+}
+.rows{
+  height:100%
+}
+#Containers{
+  height:100%;
+}
+
+.fill{
+  height:100%
+}
+  height:1000px
+.scroll{
+  overflow-y:scroll;
+  width:100%;
+}
+#Inputview{
+}
+
+#Preview
+{
+}
+:-moz-full-screen {
+  padding:10px;
+  overflow-y:scroll;
+}
+
+:-webkit-full-screen {
+  padding:10px;
+  overflow-y:scroll;
+}
+
+:-ms-fullscreen {
+  padding:10px;
+  overflow-y:scroll;
+}
+
+:fullscreen {
+  padding:10px;
+  overflow-y:scroll;
 }
