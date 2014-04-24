@@ -19,12 +19,11 @@ $(function() {
 });
 
 $(function() {
-  var $Input, $Presen, $Preview, $Type, $Zen, $ZenView, fullscreen, key, linebreak, typeMode;
+  var $Input, $Presen, $Preview, $Zen, $ZenView, fullscreen;
   $Zen = $('#Zen');
   $ZenView = $('#ZenView');
   $Presen = $('#Presentation');
   $Preview = $('#Preview');
-  $Type = $('#Typewriter');
   $Input = $('#Inputview');
   $Zen.click(function() {
     var target;
@@ -35,24 +34,6 @@ $(function() {
     var target;
     target = document.getElementById('Preview');
     return fullscreen(target);
-  });
-  typeMode = false;
-  key = new Audio('/sound/key.mp3');
-  linebreak = new Audio('/sound/linebreak.mp3');
-  $Type.click(function() {
-    return typeMode ^= true;
-  });
-  $Input.keydown(function(e) {
-    if (!typeMode) {
-      return;
-    }
-    if (e.keyCode === 13) {
-      linebreak.play();
-      return linebreak = new Audio(linebreak.src);
-    } else {
-      key.play();
-      return key = new Audio(key.src);
-    }
   });
   return fullscreen = function(target) {
     if (target.webkitRequestFullscreen) {
@@ -160,6 +141,67 @@ $(function() {
       return $Versions.text("version " + (page.date.length - window.counter) + " in " + page.date.length + " versions");
     }
   };
+});
+
+$(function() {
+  var $Input, $Type, backspace, end, i, keys, linebreak, release, start, _i;
+  $Input = $('#Inputview');
+  $Type = $('#Typewriter');
+  window.typeMode = false;
+  keys = [];
+  for (i = _i = 1; _i <= 4; i = ++_i) {
+    keys.push(new Audio("/sound/key" + i + ".wav"));
+  }
+  console.log(keys);
+  linebreak = new Audio('/sound/return.wav');
+  start = new Audio('/sound/start.wav');
+  end = new Audio('/sound/end.wav');
+  backspace = new Audio('/sound/backspace.wav');
+  release = new Audio('/sound/release.wav');
+  $Type.click(function() {
+    return window.typeMode ^= true;
+  });
+  $Input.focusin(function() {
+    if (window.typeMode === false) {
+      return;
+    }
+    start.play();
+    return start = new Audio(start.src);
+  });
+  $Input.focusout(function() {
+    if (window.typeMode === false) {
+      return;
+    }
+    end.play();
+    return end = new Audio(end.src);
+  });
+  $Input.keydown(function(e) {
+    var random;
+    if (!typeMode) {
+      return;
+    }
+    if (e.keyCode === 13) {
+      linebreak.play();
+      return linebreak = new Audio(linebreak.src);
+    } else if (e.keyCode === 8 || e.keyCode === 46) {
+      backspace.play();
+      return backspace = new Audio(backspace.src);
+    } else {
+      random = Math.floor(Math.random() * 4) + 1 - 1;
+      keys[random].play();
+      return keys[random] = new Audio(keys[random].src);
+    }
+  });
+  return $Input.keyup(function(e) {
+    if (window.typeMode === false) {
+      return;
+    }
+    if (e.keyCode === 13) {
+      return;
+    }
+    release.play();
+    return release = new Audio(release.src);
+  });
 });
 
 $(function() {

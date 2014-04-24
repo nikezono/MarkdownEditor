@@ -6,7 +6,6 @@ $ ->
   $Presen    = $('#Presentation')
   $Preview   = $('#Preview')
 
-  $Type    = $('#Typewriter')
 
   $Input   = $('#Inputview')
 
@@ -20,23 +19,6 @@ $ ->
     target = document.getElementById('Preview')
     fullscreen(target)
 
-
-
-  # TypeWriter
-  typeMode  = false
-
-  key       = new Audio('/sound/key.mp3')
-  linebreak = new Audio('/sound/linebreak.mp3')
-
-  $Type.click -> typeMode ^= true
-  $Input.keydown (e)->
-    return unless typeMode
-    if e.keyCode is 13
-      linebreak.play()
-      linebreak = new Audio( linebreak.src )
-    else
-      key.play()
-      key = new Audio( key.src )
 
   fullscreen = (target)->
     if target.webkitRequestFullscreen
