@@ -144,9 +144,10 @@ $(function() {
 });
 
 $(function() {
-  var $Input, $Type, backspace, end, i, keys, linebreak, release, start, _i;
+  var $Input, $Type, $TypeMode, backspace, end, i, keys, linebreak, release, start, _i;
   $Input = $('#Inputview');
   $Type = $('#Typewriter');
+  $TypeMode = $('#TypeMode');
   window.typeMode = false;
   keys = [];
   for (i = _i = 1; _i <= 4; i = ++_i) {
@@ -159,7 +160,8 @@ $(function() {
   backspace = new Audio('/sound/backspace.wav');
   release = new Audio('/sound/release.wav');
   $Type.click(function() {
-    return window.typeMode ^= true;
+    window.typeMode ^= true;
+    return $TypeMode.text("Typewriter=" + window.typeMode);
   });
   $Input.focusin(function() {
     if (window.typeMode === false) {

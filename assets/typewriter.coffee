@@ -1,7 +1,8 @@
 $ ->
 
-  $Input   = $('#Inputview')
-  $Type    = $('#Typewriter')
+  $Input    = $('#Inputview')
+  $Type     = $('#Typewriter')
+  $TypeMode = $('#TypeMode')
 
   # TypeWriter
   window.typeMode  = false
@@ -16,7 +17,9 @@ $ ->
   backspace = new Audio('/sound/backspace.wav')
   release   = new Audio('/sound/release.wav')
 
-  $Type.click -> window.typeMode ^= true
+  $Type.click ->
+    window.typeMode ^= true
+    $TypeMode.text("Typewriter=#{window.typeMode}")
 
   # Start
   $Input.focusin ->
