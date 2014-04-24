@@ -18,28 +18,31 @@ html,body
   overflow-y:scroll;
   width:100%;
 }
-#Inputview{
-}
 
-#Preview
-{
-}
 :-moz-full-screen {
   padding:10px;
   overflow-y:scroll;
+  width:100%;
+  height:100%;
 }
 
 :-webkit-full-screen {
   padding:10px;
+  width:100%;
+  height:100%;
   overflow-y:scroll;
 }
 
 :-ms-fullscreen {
+  width:100%;
+  height:100%;
   padding:10px;
   overflow-y:scroll;
 }
 
 :fullscreen {
   padding:10px;
-  overflow-y:scroll;
+  width:100%;
+  height:100%;
+ overflow-y:scroll;
 }
