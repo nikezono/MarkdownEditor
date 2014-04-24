@@ -27,4 +27,8 @@ body
     .col-lg-12#Titles
       h1 Markdown Editor
       p markdown editor,previewer,converter
+    .col-lg-12(style="display:none")
+      .alert.alert-danger.alert-dismissible
+        button.close(data-dismiss="alert" aria-hidden=true) &times;
+        p#Alert
     block content

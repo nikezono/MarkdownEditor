@@ -8,27 +8,35 @@ block content
           i.glyphicon.glyphicon-eye-open
           span  Zen
       .btn-group
-        a#MdSave
-          button.btn.btn-primary
-            i.glyphicon.glyphicon-floppy-save
-            span  Download .md
+        button.btn.btn-success#Presentation
+          i.glyphicon.glyphicon-play-circle
+          span  Presentation
       .btn-group
-        a#HtmlSave
-          button.btn.btn-success
-            i.glyphicon.glyphicon-arrow-down
-            span  Download .html
+        button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown")
+          i.glyphicon.glyphicon-download
+          = ' Download '
+          span.caret
+        ul.dropdown-menu(role="menu")
+          li
+            a#MdSave
+              i.glyphicon.glyphicon-floppy-save
+              span  Download .md
+          li
+            a#HtmlSave
+              i.glyphicon.glyphicon-save
+              span  Download .html
       .btn-group
         button.btn.btn-info#Typewriter
           i.glyphicon.glyphicon-volume-down
           span  Typewriter
       .btn-group
         button.btn.btn-default#Prev
-          i.glyphicon.glyphicon-volume-down
+          i.glyphicon.glyphicon-backward
           span  Prev
 
       .btn-group
         button.btn.btn-inverse#Next
-          i.glyphicon.glyphicon-volume-down
+          i.glyphicon.glyphicon-forward
           span  Next
   .col-lg-3
     p
