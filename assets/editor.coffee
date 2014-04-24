@@ -2,6 +2,10 @@ $ ->
 
   $Zen     = $('#Zen')
   $ZenView = $('#ZenView')
+
+  $Presen    = $('#Presentation')
+  $Preview   = $('#Preview')
+
   $Type    = $('#Typewriter')
 
   $Input   = $('#Inputview')
@@ -9,14 +13,12 @@ $ ->
   # Zen
   $Zen.click ->
     target = document.getElementById('ZenView')
-    $ZenView.addClass 'fullscreen'
-    if target.webkitRequestFullscreen
-      target.webkitRequestFullscreen() #Chrome15+, Safari5.1+, Opera15+
-    else if target.mozRequestFullScreen
-      target.mozRequestFullScreen() #FF10+
-    else if target.msRequestFullscreen
-      target.msRequestFullscreen() #IE11+
-    else target.requestFullscreen()  if target.requestFullscreen # HTML5 Fullscreen API仕様
+    fullscreen(target)
+
+  #Presentation
+  $Presen.click ->
+    target = document.getElementById('Preview')
+    fullscreen(target)
 
 
 
@@ -35,4 +37,14 @@ $ ->
     else
       key.play()
       key = new Audio( key.src )
+
+  fullscreen = (target)->
+    if target.webkitRequestFullscreen
+      target.webkitRequestFullscreen() #Chrome15+, Safari5.1+, Opera15+
+    else if target.mozRequestFullScreen
+      target.mozRequestFullScreen() #FF10+
+    else if target.msRequestFullscreen
+      target.msRequestFullscreen() #IE11+
+    else target.requestFullscreen()  if target.requestFullscreen # HTML5 Fullscreen API仕様
+
 
