@@ -160,14 +160,13 @@ $(function() {
   for (i = _i = 1; _i <= 4; i = ++_i) {
     keys.push(new Audio("/sound/key" + i + ".wav"));
   }
-  console.log(keys);
   linebreak = new Audio('/sound/return.wav');
   start = new Audio('/sound/start.wav');
   end = new Audio('/sound/end.wav');
   backspace = new Audio('/sound/backspace.wav');
   release = new Audio('/sound/release.wav');
   $Type.click(function() {
-    window.typeMode ^= true;
+    window.typeMode = !window.typeMode;
     return $TypeMode.text("Typewriter=" + window.typeMode);
   });
   $Input.focusin(function() {
@@ -186,7 +185,7 @@ $(function() {
   });
   $Input.keydown(function(e) {
     var random;
-    if (!typeMode) {
+    if (window.typeMode === false) {
       return;
     }
     if (e.keyCode === 13) {

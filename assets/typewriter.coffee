@@ -10,7 +10,6 @@ $ ->
   keys      = []
   for i in [1..4]
     keys.push new Audio("/sound/key#{i}.wav")
-  console.log keys
   linebreak = new Audio('/sound/return.wav')
   start     = new Audio('/sound/start.wav')
   end       = new Audio('/sound/end.wav')
@@ -18,7 +17,7 @@ $ ->
   release   = new Audio('/sound/release.wav')
 
   $Type.click ->
-    window.typeMode ^= true
+    window.typeMode = !window.typeMode
     $TypeMode.text("Typewriter=#{window.typeMode}")
 
   # Start
@@ -35,7 +34,7 @@ $ ->
 
   # Keydown
   $Input.keydown (e)->
-    return unless typeMode
+    return if window.typeMode is false
     if e.keyCode is 13
       linebreak.play()
       linebreak = new Audio( linebreak.src )
