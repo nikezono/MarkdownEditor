@@ -154,6 +154,7 @@ $(function() {
     var html, page;
     source = $Input.html().replace(/&nbsp;/gi, ' ').replace(/<br>/gi, '\n').replace(/<div>/gi, '\n').replace(/<\/div>/gi, '');
     html = marked(source);
+    console.log(html = html.replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/script/gi, 'text'));
     $Preview.html(html);
     $('pre code').each(function(i, e) {
       return hljs.highlightBlock(e);
