@@ -23,7 +23,8 @@ $ ->
     $Html.attr('href',window.URL.createObjectURL(html))
     .attr("download","file.html")
 
-  downloadURLUpdate()
+  if window.location.pathname isnt "/"
+    downloadURLUpdate()
   $Input.change ->
     downloadURLUpdate()
 

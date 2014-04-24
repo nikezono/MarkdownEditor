@@ -17,7 +17,9 @@ $(function() {
     });
     return $Html.attr('href', window.URL.createObjectURL(html)).attr("download", "file.html");
   };
-  downloadURLUpdate();
+  if (window.location.pathname !== "/") {
+    downloadURLUpdate();
+  }
   return $Input.change(function() {
     return downloadURLUpdate();
   });
